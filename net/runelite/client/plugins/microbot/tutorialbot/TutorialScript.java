@@ -815,14 +815,6 @@ public class TutorialScript extends Script {
     }
 
     private void openTab(InterfaceTab tab) {
-        if (Rs2Tab.getCurrentTab() == tab) {
-            return;
-        }
-        Rs2Tab.switchTo(tab);
-        sleep(200, 400);
-        if (Rs2Tab.getCurrentTab() == tab) {
-            return;
-        }
         Widget w = null;
         switch (tab) {
             case SETTINGS:
@@ -916,7 +908,10 @@ public class TutorialScript extends Script {
         }
         if (w != null && Rs2Widget.isWidgetVisible(w.getId()) && w.getWidth() > 0) {
             Rs2Widget.clickWidget(w);
-            sleep(300, 600);
+            sleep(400, 700);
+        } else {
+            Rs2Tab.switchTo(tab);
+            sleep(400, 700);
         }
     }
 
