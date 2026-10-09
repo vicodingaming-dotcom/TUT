@@ -829,65 +829,87 @@ public class TutorialScript extends Script {
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE11);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE11);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE11);
+                if (w == null) w = Rs2Widget.getWidget(164, 41);
+                if (w == null) w = Rs2Widget.getWidget(548, 41);
                 if (w == null) w = Rs2Widget.getWidget(548, 52);
-                if (w == null) w = Rs2Widget.getWidget(164, 77);
-                if (w == null) w = Rs2Widget.getWidget(161, 77);
                 break;
             case INVENTORY:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE3);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE3);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE3);
+                if (w == null) w = Rs2Widget.getWidget(164, 55);
+                if (w == null) w = Rs2Widget.getWidget(548, 55);
                 if (w == null) w = Rs2Widget.getWidget(548, 67);
                 break;
             case SKILLS:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE1);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE1);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE1);
+                if (w == null) w = Rs2Widget.getWidget(164, 53);
+                if (w == null) w = Rs2Widget.getWidget(548, 53);
                 break;
             case QUESTS:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE2);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE2);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE2);
+                if (w == null) w = Rs2Widget.getWidget(164, 54);
+                if (w == null) w = Rs2Widget.getWidget(548, 54);
                 break;
             case EQUIPMENT:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE4);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE4);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE4);
+                if (w == null) w = Rs2Widget.getWidget(164, 56);
+                if (w == null) w = Rs2Widget.getWidget(548, 56);
                 break;
             case PRAYER:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE5);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE5);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE5);
+                if (w == null) w = Rs2Widget.getWidget(164, 57);
+                if (w == null) w = Rs2Widget.getWidget(548, 57);
                 break;
             case MAGIC:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE6);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE6);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE6);
+                if (w == null) w = Rs2Widget.getWidget(164, 58);
+                if (w == null) w = Rs2Widget.getWidget(548, 58);
                 break;
             case FRIENDS:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE9);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE9);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE9);
+                if (w == null) w = Rs2Widget.getWidget(164, 40);
+                if (w == null) w = Rs2Widget.getWidget(548, 40);
                 break;
             case ACC_MAN:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE8);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE8);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE8);
+                if (w == null) w = Rs2Widget.getWidget(164, 39);
+                if (w == null) w = Rs2Widget.getWidget(548, 39);
                 break;
             case EMOTES:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE12);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE12);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE12);
+                if (w == null) w = Rs2Widget.getWidget(164, 42);
+                if (w == null) w = Rs2Widget.getWidget(548, 42);
                 break;
             case MUSIC:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE13);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE13);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE13);
+                if (w == null) w = Rs2Widget.getWidget(164, 43);
+                if (w == null) w = Rs2Widget.getWidget(548, 43);
                 break;
             case COMBAT:
                 w = Rs2Widget.getWidget(InterfaceID.Toplevel.STONE0);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelPreEoc.STONE0);
                 if (w == null) w = Rs2Widget.getWidget(InterfaceID.ToplevelOsrsStretch.STONE0);
+                if (w == null) w = Rs2Widget.getWidget(164, 52);
+                if (w == null) w = Rs2Widget.getWidget(548, 52);
                 break;
             default:
                 break;
