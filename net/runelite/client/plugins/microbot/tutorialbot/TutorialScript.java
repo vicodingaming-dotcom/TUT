@@ -658,40 +658,40 @@ public class TutorialScript extends Script {
         // 1. Character Appearance Customization Screen (Widget 679)
         if (Rs2Widget.isWidgetVisible(679, 0)) {
             Microbot.status = "Randomizing Character Appearance";
-            // Randomize gender (6 = Male, 7 = Female)
+            // Randomize gender (68 = Male, 69 = Female)
             boolean isFemale = random.nextBoolean();
-            Rs2Widget.clickWidget(679, isFemale ? 7 : 6);
-            sleep(400, 800);
+            Rs2Widget.clickWidget(679, isFemale ? 69 : 68);
+            sleep(500, 900);
 
             // Each pair is [prevArrow, nextArrow] for a specific feature:
-            // Hair (12, 13), Beard (14, 15 - only if male), Torso (20, 21), Arms (24, 25),
-            // Hands (28, 29), Legs (32, 33), Feet (36, 37),
-            // Hair Color (43, 44), Torso Color (47, 48), Legs Color (51, 52), Feet Color (55, 56), Skin Color (59, 60)
+            // Hair (15, 16), Beard (19, 20 - only if male), Torso (23, 24), Arms (27, 28),
+            // Hands (31, 32), Legs (35, 36), Feet (39, 40),
+            // Hair Color (46, 47), Torso Color (50, 51), Legs Color (54, 55), Feet Color (58, 59), Skin Color (62, 63)
             int[][] featureArrows = isFemale ? new int[][]{
-                    {12, 13}, // Hair style
-                    {20, 21}, // Torso style
-                    {24, 25}, // Arms style
-                    {28, 29}, // Wrists/Hands style
-                    {32, 33}, // Legs style
-                    {36, 37}, // Feet style
-                    {43, 44}, // Hair color
-                    {47, 48}, // Torso color
-                    {51, 52}, // Legs color
-                    {55, 56}, // Feet color
-                    {59, 60}  // Skin color
+                    {15, 16}, // Hair style
+                    {23, 24}, // Torso style
+                    {27, 28}, // Arms style
+                    {31, 32}, // Wrists/Hands style
+                    {35, 36}, // Legs style
+                    {39, 40}, // Feet style
+                    {46, 47}, // Hair color
+                    {50, 51}, // Torso color
+                    {54, 55}, // Legs color
+                    {58, 59}, // Feet color
+                    {62, 63}  // Skin color
             } : new int[][]{
-                    {12, 13}, // Hair style
-                    {14, 15}, // Beard style
-                    {20, 21}, // Torso style
-                    {24, 25}, // Arms style
-                    {28, 29}, // Wrists/Hands style
-                    {32, 33}, // Legs style
-                    {36, 37}, // Feet style
-                    {43, 44}, // Hair color
-                    {47, 48}, // Torso color
-                    {51, 52}, // Legs color
-                    {55, 56}, // Feet color
-                    {59, 60}  // Skin color
+                    {15, 16}, // Hair style
+                    {19, 20}, // Beard style
+                    {23, 24}, // Torso style
+                    {27, 28}, // Arms style
+                    {31, 32}, // Wrists/Hands style
+                    {35, 36}, // Legs style
+                    {39, 40}, // Feet style
+                    {46, 47}, // Hair color
+                    {50, 51}, // Torso color
+                    {54, 55}, // Legs color
+                    {58, 59}, // Feet color
+                    {62, 63}  // Skin color
             };
 
             for (int[] arrowPair : featureArrows) {
@@ -713,7 +713,7 @@ public class TutorialScript extends Script {
             Microbot.status = "Confirming Appearance";
             if (!Rs2Widget.clickWidget("Accept")) {
                 if (!Rs2Widget.clickWidget("Confirm")) {
-                    Rs2Widget.clickWidget(679, 68);
+                    Rs2Widget.clickWidget(679, 74);
                 }
             }
             sleep(2000, 3500);
