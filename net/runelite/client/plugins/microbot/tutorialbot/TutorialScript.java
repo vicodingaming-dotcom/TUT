@@ -11,6 +11,7 @@ import net.runelite.client.plugins.microbot.Script;
 import net.runelite.client.plugins.microbot.globval.enums.InterfaceTab;
 import net.runelite.client.plugins.microbot.util.bank.Rs2Bank;
 import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue;
+import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment;
 import net.runelite.client.plugins.microbot.util.gameobject.Rs2GameObject;
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory;
 import net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard;
@@ -498,22 +499,31 @@ public class TutorialScript extends Script {
                 }
                 break;
             case 470:
-                Microbot.status = "Leaving Rat Pit to Talk to Instructor";
-                if (Rs2Player.getWorldLocation() != null && Rs2Player.getWorldLocation().distanceTo(COMBAT_LOCATION) > 6) {
+            case 480:
+                Microbot.status = "Talking to Combat Instructor for Bow";
+                WorldPoint myPos = Rs2Player.getWorldLocation();
+                if (myPos != null && myPos.getY() >= 9514 && myPos.getX() <= 3108) {
                     interactObject("Gate", "Open");
-                    Rs2Walker.walkTo(COMBAT_LOCATION);
-                    waitCondition(() -> Rs2Player.getWorldLocation() != null && Rs2Player.getWorldLocation().distanceTo(COMBAT_LOCATION) <= 4, 6000);
+                    sleep(800, 1500);
                 }
                 talkToNpc("Combat Instructor");
                 break;
-            case 480:
             case 490:
                 Microbot.status = "Attacking Giant Rat (Ranged)";
-                Rs2Inventory.wield("Shortbow");
-                Rs2Inventory.wield("Bronze arrow");
-                if (!Rs2Player.isInCombat()) {
-                    Rs2Npc.interact("Giant rat", "Attack");
-                    waitCondition(Rs2Player::isInCombat, 4000);
+                if (Rs2Inventory.hasItem("Shortbow")) {
+                    Rs2Inventory.wield("Shortbow");
+                    sleep(400, 700);
+                }
+                if (Rs2Inventory.hasItem("Bronze arrow")) {
+                    Rs2Inventory.wield("Bronze arrow");
+                    sleep(400, 700);
+                }
+                if (Rs2Equipment.isWearing("Shortbow") && !Rs2Player.isInCombat()) {
+                    NPC rat = Rs2Npc.getNpc("Giant rat");
+                    if (rat != null) {
+                        Rs2Npc.interact(rat, "Attack");
+                        waitCondition(Rs2Player::isInCombat, 4000);
+                    }
                 }
                 break;
             case 500:
