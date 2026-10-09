@@ -245,22 +245,26 @@ public class TutorialScript extends Script {
             case 90:
             case 100:
             case 110:
-                if (Rs2Inventory.hasItem("Raw shrimps")) {
+                if (Rs2Player.isAnimating()) {
+                    return;
+                }
+                if (Rs2Inventory.hasItem("Raw shrimps", true)) {
                     Microbot.status = "Cooking Shrimp on Fire";
                     GameObject fire = Rs2GameObject.getGameObject("Fire");
-                    if (fire == null && Rs2Inventory.hasItem("Logs") && Rs2Inventory.hasItem("Tinderbox")) {
+                    if (fire == null && Rs2Inventory.hasItem("Logs", true) && Rs2Inventory.hasItem("Tinderbox", true)) {
                         Rs2Inventory.combine("Tinderbox", "Logs");
                         waitCondition(() -> Rs2GameObject.getGameObject("Fire") != null, 5000);
                         fire = Rs2GameObject.getGameObject("Fire");
-                    } else if (fire == null && !Rs2Inventory.hasItem("Logs")) {
+                    } else if (fire == null && !Rs2Inventory.hasItem("Logs", true)) {
                         interactObject("Tree", "Chop down");
-                        waitCondition(() -> Rs2Inventory.hasItem("Logs"), 6000);
+                        waitCondition(() -> Rs2Inventory.hasItem("Logs", true), 6000);
                     }
                     if (fire != null && !Rs2Player.isAnimating()) {
                         Rs2Inventory.use("Raw shrimps");
-                        sleep(200, 400);
+                        sleep(300, 600);
                         Rs2GameObject.interact(fire);
-                        waitCondition(() -> Rs2Inventory.hasItem("Shrimps") || !Rs2Inventory.hasItem("Raw shrimps"), 6000);
+                        waitCondition(() -> Rs2Inventory.hasItem("Shrimps", true) || !Rs2Inventory.hasItem("Raw shrimps", true), 6000);
+                        sleepUntil(() -> !Rs2Player.isAnimating(), 3000);
                     }
                 }
                 break;
@@ -282,18 +286,26 @@ public class TutorialScript extends Script {
                 break;
             case 150:
                 Microbot.status = "Making Dough";
-                if (Rs2Inventory.hasItem("Pot of flour") && Rs2Inventory.hasItem("Bucket of water")) {
+                if (Rs2Inventory.hasItem("Bread dough", true)) {
+                    return;
+                }
+                if (Rs2Inventory.hasItem("Pot of flour", true) && Rs2Inventory.hasItem("Bucket of water", true)) {
                     Rs2Inventory.combine("Pot of flour", "Bucket of water");
-                    waitCondition(() -> Rs2Inventory.hasItem("Bread dough"), 4000);
+                    waitCondition(() -> Rs2Inventory.hasItem("Bread dough", true), 4000);
+                    sleep(400, 800);
                 }
                 break;
             case 160:
                 Microbot.status = "Baking Bread on Range";
-                if (Rs2Inventory.hasItem("Bread dough")) {
+                if (Rs2Player.isAnimating()) {
+                    return;
+                }
+                if (Rs2Inventory.hasItem("Bread dough", true)) {
                     Rs2Inventory.use("Bread dough");
-                    sleep(200, 400);
+                    sleep(300, 600);
                     interactObject("Range", "Use");
-                    waitCondition(() -> Rs2Inventory.hasItem("Bread"), 6000);
+                    waitCondition(() -> Rs2Inventory.hasItem("Bread", true) || !Rs2Inventory.hasItem("Bread dough", true), 6000);
+                    sleepUntil(() -> !Rs2Player.isAnimating(), 3000);
                 }
                 break;
             case 170:
@@ -647,22 +659,57 @@ public class TutorialScript extends Script {
         if (Rs2Widget.isWidgetVisible(679, 0)) {
             Microbot.status = "Randomizing Character Appearance";
             // Randomize gender (6 = Male, 7 = Female)
-            if (random.nextBoolean()) {
-                Rs2Widget.clickWidget(679, 6);
-            } else {
-                Rs2Widget.clickWidget(679, 7);
-            }
-            sleep(300, 600);
+            boolean isFemale = random.nextBoolean();
+            Rs2Widget.clickWidget(679, isFemale ? 7 : 6);
+            sleep(400, 800);
 
-            // Randomize clothes, hair, skin by clicking arrows
-            int[] arrowChildIds = {12, 13, 14, 15, 20, 21, 24, 25, 28, 29, 32, 33, 36, 37, 43, 44, 47, 48, 51, 52, 55, 56, 59, 60};
-            int clicks = 5 + random.nextInt(6);
-            for (int i = 0; i < clicks; i++) {
-                int arrow = arrowChildIds[random.nextInt(arrowChildIds.length)];
-                Rs2Widget.clickWidget(679, arrow);
-                sleep(100, 250);
+            // Each pair is [prevArrow, nextArrow] for a specific feature:
+            // Hair (12, 13), Beard (14, 15 - only if male), Torso (20, 21), Arms (24, 25),
+            // Hands (28, 29), Legs (32, 33), Feet (36, 37),
+            // Hair Color (43, 44), Torso Color (47, 48), Legs Color (51, 52), Feet Color (55, 56), Skin Color (59, 60)
+            int[][] featureArrows = isFemale ? new int[][]{
+                    {12, 13}, // Hair style
+                    {20, 21}, // Torso style
+                    {24, 25}, // Arms style
+                    {28, 29}, // Wrists/Hands style
+                    {32, 33}, // Legs style
+                    {36, 37}, // Feet style
+                    {43, 44}, // Hair color
+                    {47, 48}, // Torso color
+                    {51, 52}, // Legs color
+                    {55, 56}, // Feet color
+                    {59, 60}  // Skin color
+            } : new int[][]{
+                    {12, 13}, // Hair style
+                    {14, 15}, // Beard style
+                    {20, 21}, // Torso style
+                    {24, 25}, // Arms style
+                    {28, 29}, // Wrists/Hands style
+                    {32, 33}, // Legs style
+                    {36, 37}, // Feet style
+                    {43, 44}, // Hair color
+                    {47, 48}, // Torso color
+                    {51, 52}, // Legs color
+                    {55, 56}, // Feet color
+                    {59, 60}  // Skin color
+            };
+
+            for (int[] arrowPair : featureArrows) {
+                // Randomly choose left or right arrow
+                int arrowId = arrowPair[random.nextInt(2)];
+                // Roll 1 to 4 clicks per feature to ensure deep variety across all features
+                int clicksForFeature = 1 + random.nextInt(4);
+                for (int c = 0; c < clicksForFeature; c++) {
+                    Rs2Widget.clickWidget(679, arrowId);
+                    sleep(350, 650);
+                }
+                // Short human pause between adjusting different body parts
+                if (random.nextInt(3) == 0) {
+                    sleep(400, 750);
+                }
             }
 
+            sleep(700, 1300);
             Microbot.status = "Confirming Appearance";
             if (!Rs2Widget.clickWidget("Accept")) {
                 if (!Rs2Widget.clickWidget("Confirm")) {
