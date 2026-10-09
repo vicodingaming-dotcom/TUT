@@ -499,8 +499,7 @@ public class TutorialScript extends Script {
                 }
                 break;
             case 470:
-            case 480:
-                Microbot.status = "Talking to Combat Instructor for Bow";
+                Microbot.status = "Leaving Rat Pit to Talk to Instructor";
                 WorldPoint myPos = Rs2Player.getWorldLocation();
                 if (myPos != null && myPos.getY() >= 9514 && myPos.getX() <= 3108) {
                     interactObject("Gate", "Open");
@@ -508,6 +507,7 @@ public class TutorialScript extends Script {
                 }
                 talkToNpc("Combat Instructor");
                 break;
+            case 480:
             case 490:
                 Microbot.status = "Attacking Giant Rat (Ranged)";
                 if (Rs2Inventory.hasItem("Shortbow")) {
@@ -518,7 +518,9 @@ public class TutorialScript extends Script {
                     Rs2Inventory.wield("Bronze arrow");
                     sleep(400, 700);
                 }
-                if (Rs2Equipment.isWearing("Shortbow") && !Rs2Player.isInCombat()) {
+                if (!Rs2Player.isInCombat()) {
+                    Microbot.cantReachTarget = false;
+                    Microbot.cantReachTargetRetries = 0;
                     NPC rat = Rs2Npc.getNpc("Giant rat");
                     if (rat != null) {
                         Rs2Npc.interact(rat, "Attack");
